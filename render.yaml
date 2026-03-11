@@ -1,0 +1,13 @@
+# Render Blueprint - https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: angular-nest-prisma-sdet-tm-app-poc
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install && npx prisma generate && npm run build
+    startCommand: npm run start
+    # Migracije i seed pri svakom deploy-u (SQLite se resetuje)
+    releaseCommand: npx prisma migrate deploy && npx prisma db seed
+    envVars:
+      - key: NODE_ENV
+        value: production

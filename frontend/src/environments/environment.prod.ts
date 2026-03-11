@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
   appName: 'Angular Task Manager',
-  apiUrl: '/api', // relative when proxied or same origin
+  apiUrl: 'https://angular-nest-prisma-sdet-tm-app-poc.onrender.com',
 };

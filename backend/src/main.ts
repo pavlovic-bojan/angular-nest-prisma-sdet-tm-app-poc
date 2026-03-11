@@ -6,7 +6,13 @@ import { AppModule } from "./app.module";
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true, transform: true }));
-  app.enableCors({ origin: ["http://localhost:4200"], credentials: true });
+  app.enableCors({
+    origin: [
+      'http://localhost:4200',
+      'https://angular-nest-prisma-sdet-tm-app-poc.vercel.app',
+    ],
+    credentials: true,
+  });
 
   const config = new DocumentBuilder()
     .setTitle("Task Manager API")
