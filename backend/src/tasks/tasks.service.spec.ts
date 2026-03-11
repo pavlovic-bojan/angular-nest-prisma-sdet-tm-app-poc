@@ -1,9 +1,9 @@
-import { Test, TestingModule } from "@nestjs/testing";
-import { NotFoundException } from "@nestjs/common";
-import { TasksService } from "./tasks.service";
-import { PrismaService } from "../prisma/prisma.service";
+import { Test, TestingModule } from '@nestjs/testing';
+import { NotFoundException } from '@nestjs/common';
+import { TasksService } from './tasks.service';
+import { PrismaService } from '../prisma/prisma.service';
 
-describe("TasksService", () => {
+describe('TasksService', () => {
   let service: TasksService;
   const mockPrisma = {
     task: {
@@ -28,60 +28,60 @@ describe("TasksService", () => {
     jest.clearAllMocks();
   });
 
-  it("should be defined", () => {
+  it('should be defined', () => {
     expect(service).toBeDefined();
   });
 
-  it("should create task", async () => {
+  it('should create task', async () => {
     mockPrisma.task.create.mockResolvedValue({
-      id: "1",
-      title: "T1",
-      status: "todo",
-      priority: "medium",
-      projectId: "p1",
+      id: '1',
+      title: 'T1',
+      status: 'todo',
+      priority: 'medium',
+      projectId: 'p1',
     });
     const result = await service.create({
-      title: "T1",
-      projectId: "p1",
+      title: 'T1',
+      projectId: 'p1',
     });
-    expect(result.title).toBe("T1");
+    expect(result.title).toBe('T1');
   });
 
-  it("should throw NotFoundException when task not found", async () => {
+  it('should throw NotFoundException when task not found', async () => {
     mockPrisma.task.findUnique.mockResolvedValue(null);
-    await expect(service.findOne("invalid")).rejects.toThrow(NotFoundException);
+    await expect(service.findOne('invalid')).rejects.toThrow(NotFoundException);
   });
 
-  it("should findAll tasks", async () => {
+  it('should findAll tasks', async () => {
     mockPrisma.task.findMany.mockResolvedValue([
-      { id: "1", title: "T1", projectId: "p1" } as never,
+      { id: '1', title: 'T1', projectId: 'p1' } as never,
     ]);
     const result = await service.findAll();
     expect(result).toHaveLength(1);
   });
 
-  it("should findAll tasks filtered by projectId", async () => {
+  it('should findAll tasks filtered by projectId', async () => {
     mockPrisma.task.findMany.mockResolvedValue([]);
-    await service.findAll("proj-1");
+    await service.findAll('proj-1');
     expect(mockPrisma.task.findMany).toHaveBeenCalledWith(
-      expect.objectContaining({ where: { projectId: "proj-1" } })
+      expect.objectContaining({ where: { projectId: 'proj-1' } }),
     );
   });
 
-  it("should update task", async () => {
+  it('should update task', async () => {
     mockPrisma.task.update.mockResolvedValue({
-      id: "1",
-      title: "Updated",
-      projectId: "p1",
+      id: '1',
+      title: 'Updated',
+      projectId: 'p1',
     } as never);
-    const result = await service.update("1", { title: "Updated" });
-    expect(result.title).toBe("Updated");
+    const result = await service.update('1', { title: 'Updated' });
+    expect(result.title).toBe('Updated');
   });
 
-  it("should remove task", async () => {
-    mockPrisma.task.findUniqueOrThrow.mockResolvedValue({ id: "1" });
+  it('should remove task', async () => {
+    mockPrisma.task.findUniqueOrThrow.mockResolvedValue({ id: '1' });
     mockPrisma.task.delete.mockResolvedValue({} as never);
-    const result = await service.remove("1");
-    expect(result).toEqual({ message: "Task deleted" });
+    const result = await service.remove('1');
+    expect(result).toEqual({ message: 'Task deleted' });
   });
 });

@@ -1,9 +1,9 @@
-import { Test, TestingModule } from "@nestjs/testing";
-import { NotFoundException } from "@nestjs/common";
-import { ProjectsService } from "./projects.service";
-import { PrismaService } from "../prisma/prisma.service";
+import { Test, TestingModule } from '@nestjs/testing';
+import { NotFoundException } from '@nestjs/common';
+import { ProjectsService } from './projects.service';
+import { PrismaService } from '../prisma/prisma.service';
 
-describe("ProjectsService", () => {
+describe('ProjectsService', () => {
   let service: ProjectsService;
   const mockPrisma = {
     project: {
@@ -28,49 +28,49 @@ describe("ProjectsService", () => {
     jest.clearAllMocks();
   });
 
-  it("should be defined", () => {
+  it('should be defined', () => {
     expect(service).toBeDefined();
   });
 
-  it("should create project", async () => {
+  it('should create project', async () => {
     mockPrisma.project.create.mockResolvedValue({
-      id: "1",
-      name: "P1",
-      description: "Desc",
+      id: '1',
+      name: 'P1',
+      description: 'Desc',
     });
-    const result = await service.create({ name: "P1", description: "Desc" });
-    expect(result.name).toBe("P1");
+    const result = await service.create({ name: 'P1', description: 'Desc' });
+    expect(result.name).toBe('P1');
   });
 
-  it("should throw NotFoundException when project not found", async () => {
+  it('should throw NotFoundException when project not found', async () => {
     mockPrisma.project.findUnique.mockResolvedValue(null);
-    await expect(service.findOne("invalid")).rejects.toThrow(NotFoundException);
+    await expect(service.findOne('invalid')).rejects.toThrow(NotFoundException);
   });
 
-  it("should findAll projects", async () => {
+  it('should findAll projects', async () => {
     mockPrisma.project.findMany.mockResolvedValue([
-      { id: "1", name: "P1", description: "D1", createdAt: new Date() },
+      { id: '1', name: 'P1', description: 'D1', createdAt: new Date() },
     ]);
     const result = await service.findAll();
     expect(result).toHaveLength(1);
   });
 
-  it("should update project", async () => {
-    mockPrisma.project.findUnique.mockResolvedValue({ id: "1" });
+  it('should update project', async () => {
+    mockPrisma.project.findUnique.mockResolvedValue({ id: '1' });
     mockPrisma.project.update.mockResolvedValue({
-      id: "1",
-      name: "Updated",
-      description: "D1",
+      id: '1',
+      name: 'Updated',
+      description: 'D1',
       createdAt: new Date(),
     });
-    const result = await service.update("1", { name: "Updated" });
-    expect(result.name).toBe("Updated");
+    const result = await service.update('1', { name: 'Updated' });
+    expect(result.name).toBe('Updated');
   });
 
-  it("should remove project", async () => {
-    mockPrisma.project.findUniqueOrThrow.mockResolvedValue({ id: "1" });
+  it('should remove project', async () => {
+    mockPrisma.project.findUniqueOrThrow.mockResolvedValue({ id: '1' });
     mockPrisma.project.delete.mockResolvedValue({} as never);
-    const result = await service.remove("1");
-    expect(result).toEqual({ message: "Project deleted" });
+    const result = await service.remove('1');
+    expect(result).toEqual({ message: 'Project deleted' });
   });
 });
