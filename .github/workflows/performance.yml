@@ -1,8 +1,6 @@
 name: Performance Tests
 
-# Manual only – requires BASE_URL (backend running locally or hosted)
-# No hosted DB/backend yet – provide URL via input or BACKEND_URL secret
-# See: tests/performance/README.md
+# Manual only – BASE_URL: input or BACKEND_URL secret
 on:
   workflow_dispatch:
     inputs:
@@ -21,14 +19,16 @@ on:
           - soak
           - all
       base_url:
-        description: "Backend URL (e.g. http://localhost:3000 or hosted URL)"
-        required: true
+        description: "Backend URL (leave empty to use BACKEND_URL secret)"
+        required: false
         type: string
 
 jobs:
   performance:
     name: k6 Performance Test
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
 
     steps:
       - uses: actions/checkout@v4
@@ -45,10 +45,15 @@ jobs:
       - name: Run performance test
         working-directory: tests/performance
         env:
-          BASE_URL: ${{ github.event.inputs.base_url }}
+          BASE_URL: ${{ github.event.inputs.base_url || secrets.BACKEND_URL }}
           LOGIN_EMAIL: ${{ secrets.LOGIN_EMAIL || 'demo@example.com' }}
           LOGIN_PASSWORD: ${{ secrets.LOGIN_PASSWORD || 'password123' }}
         run: |
+          if [ -z "$BASE_URL" ]; then
+            echo "Error: BASE_URL required. Set BACKEND_URL secret or provide base_url input."
+            exit 1
+          fi
+          echo "Using BASE_URL: $BASE_URL"
           TEST_TYPE="${{ github.event.inputs.test_type || 'smoke' }}"
           case "$TEST_TYPE" in
             smoke)      k6 run smoke/smoke.js ;;
