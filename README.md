@@ -2,7 +2,14 @@
 
 Aplikacija za upravljanje taskovima, korisnicima i projektima. Angular 18 + NestJS + Prisma + SQLite.
 
-**Live:** [angular-nest-prisma-sdet-tm-app-poc.vercel.app](https://angular-nest-prisma-sdet-tm-app-poc.vercel.app) (frontend na Vercel – backend još nije hostovan)
+## Live
+
+| App | URL |
+|-----|-----|
+| **Frontend** | [angular-nest-prisma-sdet-tm-app-poc.vercel.app](https://angular-nest-prisma-sdet-tm-app-poc.vercel.app/) |
+| **Backend** | [angular-nest-prisma-sdet-tm-app-poc.onrender.com](https://angular-nest-prisma-sdet-tm-app-poc.onrender.com/) |
+| **Swagger API** | [angular-nest-prisma-sdet-tm-app-poc.onrender.com/api](https://angular-nest-prisma-sdet-tm-app-poc.onrender.com/api) |
+| **Test Reports** | [GitHub Pages](https://pavlovic-bojan.github.io/angular-nest-prisma-sdet-tm-app-poc/) – [Allure (E2E)](https://pavlovic-bojan.github.io/angular-nest-prisma-sdet-tm-app-poc/allure/), [Performance (k6)](https://pavlovic-bojan.github.io/angular-nest-prisma-sdet-tm-app-poc/load/) |
 
 ## Tech stack
 
@@ -59,7 +66,8 @@ npm start
 
 ## API dokumentacija
 
-Swagger: http://localhost:3000/api
+- **Produkcija:** [Swagger UI](https://angular-nest-prisma-sdet-tm-app-poc.onrender.com/api)
+- **Lokalno:** http://localhost:3000/api
 
 ## Testiranje
 

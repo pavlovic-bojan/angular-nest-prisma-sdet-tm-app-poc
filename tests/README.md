@@ -95,13 +95,21 @@ npm run test:ui
 npm test
 ```
 
-### Allure reports
+### Allure reports (lokalno)
 
 ```bash
 npm run test:api:report   # API tests + open report
 npm run test:ui:report    # UI tests + open report
 npm run test:report       # All tests + open report
 ```
+
+### CI reports (GitHub Pages)
+
+| Report | URL |
+|--------|-----|
+| **Landing** | [pavlovic-bojan.github.io/angular-nest-prisma-sdet-tm-app-poc](https://pavlovic-bojan.github.io/angular-nest-prisma-sdet-tm-app-poc/) |
+| **Allure (E2E)** | [allure/](https://pavlovic-bojan.github.io/angular-nest-prisma-sdet-tm-app-poc/allure/) |
+| **Performance (k6)** | [load/](https://pavlovic-bojan.github.io/angular-nest-prisma-sdet-tm-app-poc/load/) |
 
 ---
 

@@ -29,7 +29,11 @@ CI workflows for Task Manager. **Frontend** is deployed on Vercel. **Backend** i
 
 ## Reports
 
-- **Allure** (E2E): Uploaded as artifact `allure-results` or `test-artifacts`
+- **Allure** (E2E): Artifact + deploy na GitHub Pages (branch `gh-pages`, path `allure/`). Uključi **GitHub Pages** u Settings → Pages → Source: gh-pages.
 - **k6** (Performance): Generated in `tests/performance/k6-report/`
+
+### E2E Production mode
+
+Manual run **E2E Tests** → check **Run against production** → uses `BACKEND_URL` and `FRONTEND_URL` secrets.
 
 See [tests/README.md](../tests/README.md) and [tests/performance/README.md](../tests/performance/README.md) for test docs.
