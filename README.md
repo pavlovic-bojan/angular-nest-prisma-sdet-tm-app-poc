@@ -2,6 +2,8 @@
 
 Aplikacija za upravljanje taskovima, korisnicima i projektima. Angular 18 + NestJS + Prisma + SQLite.
 
+**Live:** [angular-nest-prisma-sdet-tm-app-poc.vercel.app](https://angular-nest-prisma-sdet-tm-app-poc.vercel.app) (frontend na Vercel – backend još nije hostovan)
+
 ## Tech stack
 
 - **Frontend:** Angular 18, TypeScript, Tailwind CSS, Reactive Forms

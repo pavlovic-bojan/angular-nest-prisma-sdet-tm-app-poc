@@ -1,6 +1,15 @@
 # GitHub Actions
 
-CI workflows for Task Manager. **Backend and frontend are not hosted yet** – workflows run tests and builds only.
+CI workflows for Task Manager. **Frontend** is deployed on Vercel. **Backend** is not hosted yet.
+
+## Deployment
+
+| App | URL | Status |
+|-----|-----|--------|
+| **Frontend** | [angular-nest-prisma-sdet-tm-app-poc.vercel.app](https://angular-nest-prisma-sdet-tm-app-poc.vercel.app) | ✅ Vercel |
+| **Backend** | — | ❌ Not hosted (SQLite, local only) |
+
+> **Note:** Frontend production build uses `apiUrl: '/api'`. When backend is hosted, update `frontend/src/environments/environment.prod.ts` or configure via Vercel env vars so the API points to the backend URL.
 
 ## Workflows
 

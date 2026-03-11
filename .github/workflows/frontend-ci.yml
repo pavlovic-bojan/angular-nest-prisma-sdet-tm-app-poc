@@ -1,6 +1,6 @@
 name: Frontend CI
 
-# Runs on frontend changes (no deploy – frontend not hosted yet)
+# Runs on frontend changes. Deploy: Vercel (auto via GitHub)
 on:
   push:
     branches: [main, master]

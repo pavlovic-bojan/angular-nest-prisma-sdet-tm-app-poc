@@ -48,7 +48,7 @@ Ensure the backend API is running at `http://localhost:3000` (see `backend/READM
 ## Environment
 
 - **Development**: `apiUrl: 'http://localhost:3000'` in `environments/environment.ts`
-- **Production**: override in `environments/environment.prod.ts` for your API URL
+- **Production**: `apiUrl: '/api'` u `environment.prod.ts` (relativno). Kad backend bude hostovan, podesi puni backend URL.
 
 ## Tests
 

@@ -1,6 +1,6 @@
 name: Backend CI
 
-# Runs on backend changes (no deploy – backend not hosted yet)
+# Runs on backend changes. Deploy: Render (auto via GitHub)
 on:
   push:
     branches: [main, master]
