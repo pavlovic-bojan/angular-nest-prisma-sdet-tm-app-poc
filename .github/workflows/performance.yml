@@ -27,6 +27,8 @@ jobs:
   performance:
     name: k6 Performance Test
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
 
@@ -66,3 +68,35 @@ jobs:
             all)        k6 run smoke/smoke.js && k6 run baseline/baseline.js && k6 run load/load.js ;;
             *)          k6 run smoke/smoke.js ;;
           esac
+
+      - name: Ensure k6 report exists
+        if: always()
+        run: |
+          mkdir -p tests/performance/k6-report
+          if [ ! -f tests/performance/k6-report/index.html ]; then
+            echo '<!DOCTYPE html><html><head><title>No k6 Results</title></head><body><h1>No report</h1><p>Test failed or did not produce HTML report.</p></body></html>' > tests/performance/k6-report/index.html
+          fi
+
+      - name: Prepare GitHub Pages content
+        if: always()
+        run: |
+          mkdir -p gh-pages-content
+          git fetch origin gh-pages 2>/dev/null || true
+          if git rev-parse origin/gh-pages >/dev/null 2>&1; then
+            git archive origin/gh-pages 2>/dev/null | tar -x -C gh-pages-content 2>/dev/null || true
+          fi
+          mkdir -p gh-pages-content/allure gh-pages-content/load
+          cp -r tests/performance/k6-report/* gh-pages-content/load/
+          if [ ! -f gh-pages-content/allure/index.html ]; then
+            echo '<!DOCTYPE html><html><body><h1>No Allure results yet</h1><p>Run E2E workflow.</p></body></html>' > gh-pages-content/allure/index.html
+          fi
+          cp .github/pages-index.html gh-pages-content/index.html
+
+      - name: Deploy to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./gh-pages-content
+          publish_branch: gh-pages
+          force_orphan: true
