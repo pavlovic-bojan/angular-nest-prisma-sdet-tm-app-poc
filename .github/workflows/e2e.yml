@@ -1,0 +1,109 @@
+name: E2E Tests
+
+# Runs when tests change or manually; requires backend + frontend (no hosting yet)
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - "tests/**"
+      - "frontend/**"
+      - "backend/**"
+      - ".github/workflows/e2e.yml"
+  workflow_dispatch:
+
+jobs:
+  e2e:
+    name: API + UI E2E
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: |
+            backend/package-lock.json
+            frontend/package-lock.json
+            tests/package-lock.json
+
+      - name: Install backend
+        run: npm ci
+        working-directory: backend
+
+      - name: Generate Prisma & migrate
+        working-directory: backend
+        env:
+          DATABASE_URL: "file:./prisma/dev.db"
+        run: |
+          npx prisma generate
+          npx prisma migrate deploy
+          npx prisma db seed
+
+      - name: Install frontend
+        run: npm ci
+        working-directory: frontend
+
+      - name: Install tests
+        run: npm ci
+        working-directory: tests
+
+      - name: Install Playwright
+        run: npx playwright install --with-deps chromium
+        working-directory: tests
+
+      - name: Start backend
+        working-directory: backend
+        env:
+          DATABASE_URL: "file:./prisma/dev.db"
+          PORT: "3000"
+        run: npm run start &
+
+      - name: Start frontend
+        working-directory: frontend
+        run: npm run start &
+        env:
+          NG_CLI_ANALYTICS: "false"
+
+      - name: Wait for services
+        run: |
+          echo "Waiting for backend..."
+          for i in $(seq 1 30); do
+            if curl -sf http://localhost:3000 > /dev/null 2>&1; then
+              echo "Backend ready"
+              break
+            fi
+            sleep 2
+          done
+          echo "Waiting for frontend..."
+          for i in $(seq 1 30); do
+            if curl -sf http://localhost:4200 > /dev/null 2>&1; then
+              echo "Frontend ready"
+              break
+            fi
+            sleep 2
+          done
+
+      - name: Run API tests
+        working-directory: tests
+        env:
+          API_BASE_URL: "http://localhost:3000"
+        run: npm run test:api
+
+      - name: Run UI tests
+        working-directory: tests
+        env:
+          BASE_URL: "http://localhost:4200"
+        run: npm run test:ui
+
+      - name: Upload Allure results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: tests/allure-results
+          retention-days: 14
+          if-no-files-found: ignore
