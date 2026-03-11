@@ -6,7 +6,7 @@ services:
     rootDir: backend
     buildCommand: npm install && npx prisma generate && npm run build
     startCommand: npm run start
-    # Migracije i seed pri svakom deploy-u (SQLite se resetuje)
+    # Migrations and seed on each deploy (SQLite is reset)
     releaseCommand: npx prisma migrate deploy && npx prisma db seed
     envVars:
       - key: NODE_ENV

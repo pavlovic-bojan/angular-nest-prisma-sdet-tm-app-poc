@@ -4,7 +4,7 @@
 [![Live](https://img.shields.io/badge/Live_Demo-green?style=flat&logo=vercel)](https://angular-nest-prisma-sdet-tm-app-poc.vercel.app/)
 [![Tests](https://img.shields.io/badge/Test_Reports-angular--nest--prisma--sdet--tm--app--poc-green?style=flat&logo=github)](https://pavlovic-bojan.github.io/angular-nest-prisma-sdet-tm-app-poc/)
 
-Task Manager aplikacija za upravljanje taskovima, korisnicima i projektima. Angular 18 + NestJS + Prisma + SQLite. E2E testovi (CodeceptJS + Playwright), API testovi (JSON Schema), k6 performance testovi.
+Task Manager application for managing tasks, users, and projects. Angular 18 + NestJS + Prisma + SQLite. E2E tests (CodeceptJS + Playwright), API tests (JSON Schema), k6 performance tests.
 
 ## 📋 Table of Contents
 
@@ -24,13 +24,13 @@ Task Manager aplikacija za upravljanje taskovima, korisnicima i projektima. Angu
 
 ## 🎯 Overview
 
-**Angular Task Manager** je full-stack aplikacija koja pruža:
+**Angular Task Manager** is a full-stack application that provides:
 
-- **Task Management** – kreiranje, uređivanje, brisanje taskova
-- **Project Management** – CRUD za projekte
-- **User Management** – upravljanje korisnicima
-- **Authentication** – login/logout sa demo nalogom
-- **REST API** – NestJS backend sa Swagger dokumentacijom
+- **Task Management** – create, edit, and delete tasks
+- **Project Management** – CRUD for projects
+- **User Management** – user management
+- **Authentication** – login/logout with demo account
+- **REST API** – NestJS backend with Swagger documentation
 
 ## 🎯 SDET Skills Showcase
 
@@ -39,14 +39,14 @@ Task Manager aplikacija za upravljanje taskovima, korisnicima i projektima. Angu
 | **E2E Testing** | CodeceptJS + Playwright + Gherkin + Page Object Model |
 | **API Testing** | CodeceptJS REST + JSON Schema (AJV) validation |
 | **Performance** | k6 (smoke, baseline, load, stress, spike, soak) |
-| **Reporting** | Allure za E2E, HTML za k6 |
+| **Reporting** | Allure for E2E, HTML for k6 |
 
 ## ✨ Features
 
 ### Core Features
 
 - ✅ **Authentication** (login/logout)
-- ✅ **Tasks** – CRUD, status, prioritet, projekat, assignee
+- ✅ **Tasks** – CRUD, status, priority, project, assignee
 - ✅ **Projects** – CRUD
 - ✅ **Users** – CRUD
 - ✅ **Responsive UI** – Tailwind CSS, sidebar + topbar
@@ -55,11 +55,11 @@ Task Manager aplikacija za upravljanje taskovima, korisnicima i projektima. Angu
 ### Technical Features
 
 - ✅ **TypeScript** – Full type safety
-- ✅ **RESTful API** sa Swagger/OpenAPI dokumentacijom
-- ✅ **SQLite** sa Prisma ORM
-- ✅ **E2E testovi** – CodeceptJS, Playwright, Gherkin
-- ✅ **API testovi** – JSON Schema validacija
-- ✅ **Performance testovi** – k6
+- ✅ **RESTful API** with Swagger/OpenAPI documentation
+- ✅ **SQLite** with Prisma ORM
+- ✅ **E2E tests** – CodeceptJS, Playwright, Gherkin
+- ✅ **API tests** – JSON Schema validation
+- ✅ **Performance tests** – k6
 - ✅ **Allure reporting** – GitHub Pages deploy
 
 ## 📁 Project Structure
@@ -68,12 +68,12 @@ Task Manager aplikacija za upravljanje taskovima, korisnicima i projektima. Angu
 angular-nest-prisma-sdet-tm-app-poc/
 ├── backend/              # NestJS API + Prisma + SQLite
 │   ├── src/
-│   │   ├── auth/         # Auth modul
+│   │   ├── auth/         # Auth module
 │   │   ├── users/        # Users CRUD
 │   │   ├── projects/     # Projects CRUD
 │   │   ├── tasks/        # Tasks CRUD
 │   │   └── prisma/       # Prisma service
-│   ├── prisma/           # Schema, migracije, seed
+│   ├── prisma/           # Schema, migrations, seed
 │   └── README.md
 │
 ├── frontend/             # Angular 18 SPA
@@ -89,7 +89,7 @@ angular-nest-prisma-sdet-tm-app-poc/
 │   ├── e2e/              # CodeceptJS (API + UI)
 │   │   ├── api/          # REST + JSON Schema
 │   │   └── ui/           # Playwright + Page Objects
-│   ├── performance/      # k6 load testovi
+│   ├── performance/      # k6 load tests
 │   └── README.md
 │
 ├── .github/workflows/    # CI workflows
@@ -101,7 +101,7 @@ angular-nest-prisma-sdet-tm-app-poc/
 
 **Prerequisites:** Node.js >= 20, npm
 
-### 1. Instalacija
+### 1. Installation
 
 ```bash
 npm run install:all
@@ -165,21 +165,21 @@ npm run start:backend
 npm start
 ```
 
-### Skripte
+### Scripts
 
-| Komanda | Opis |
-|---------|------|
+| Command | Description |
+|---------|-------------|
 | `npm start` | Frontend dev server |
 | `npm run start:backend` | Backend dev server |
 | `npm run build` | Build frontend |
 | `npm run build:backend` | Build backend |
-| `npm test` | Frontend unit testovi |
-| `npm run test:backend` | Backend unit testovi |
+| `npm test` | Frontend unit tests |
+| `npm run test:backend` | Backend unit tests |
 | `npm run e2e` | E2E (API + UI) |
-| `npm run test:api` | Samo API testovi |
-| `npm run test:ui` | Samo UI testovi |
-| `npm run db:migrate` | Prisma migracija |
-| `npm run db:seed` | Seed baze |
+| `npm run test:api` | API tests only |
+| `npm run test:ui` | UI tests only |
+| `npm run db:migrate` | Prisma migration |
+| `npm run db:seed` | Seed database |
 | `npm run tests:performance` | k6 performance |
 
 ## 🧪 Testing
@@ -192,13 +192,13 @@ npm start
 - ✅ **E2E UI:** CodeceptJS Playwright + Gherkin + POM
 - ✅ **Performance:** k6 (smoke, baseline, load, stress, spike, soak)
 
-### Lokalno pokretanje
+### Running locally
 
 ```bash
-# API testovi (backend mora biti pokrenut)
+# API tests (backend must be running)
 cd tests && npm run test:api
 
-# UI testovi (backend + frontend moraju biti pokrenuti)
+# UI tests (backend and frontend must be running)
 cd tests && npm run test:ui
 
 # Performance
@@ -231,7 +231,7 @@ BASE_URL=http://localhost:3000 npm run tests:performance
 | **Allure** (E2E) | [allure/](https://pavlovic-bojan.github.io/angular-nest-prisma-sdet-tm-app-poc/allure/) |
 | **k6 Load Test** | [load/](https://pavlovic-bojan.github.io/angular-nest-prisma-sdet-tm-app-poc/load/) |
 
-Deploy nakon svakog E2E i Performance run-a. **Settings → Pages → Deploy from branch** → `gh-pages`.
+Deployed after each E2E and Performance run. **Settings → Pages → Deploy from branch** → `gh-pages`.
 
 ## ⚙️ GitHub Actions (CI)
 
@@ -254,7 +254,7 @@ Proprietary – All rights reserved
 
 `angular` `nestjs` `prisma` `sqlite` `codeceptjs` `playwright` `k6-io` `sdet` `e2e-testing` `performance-testing` `task-manager` `fullstack`
 
-*Dodaj u **About → Topics** na GitHubu.*
+*Add to **About → Topics** on GitHub.*
 
 ---
 

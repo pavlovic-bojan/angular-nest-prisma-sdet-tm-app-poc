@@ -95,7 +95,7 @@ npm run test:ui
 npm test
 ```
 
-### Allure reports (lokalno)
+### Allure reports (locally)
 
 ```bash
 npm run test:api:report   # API tests + open report

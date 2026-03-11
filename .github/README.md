@@ -1,15 +1,15 @@
 # GitHub Actions
 
-CI workflows for Task Manager. **Frontend** is deployed on Vercel. **Backend** is not hosted yet.
+CI workflows for Task Manager. **Frontend** is deployed on Vercel. **Backend** is deployed on Render.
 
 ## Deployment
 
 | App | URL | Status |
 |-----|-----|--------|
 | **Frontend** | [angular-nest-prisma-sdet-tm-app-poc.vercel.app](https://angular-nest-prisma-sdet-tm-app-poc.vercel.app) | ✅ Vercel |
-| **Backend** | — | ❌ Not hosted (SQLite, local only) |
+| **Backend** | [angular-nest-prisma-sdet-tm-app-poc.onrender.com](https://angular-nest-prisma-sdet-tm-app-poc.onrender.com) | ✅ Render |
 
-> **Note:** Frontend production build uses `apiUrl: '/api'`. When backend is hosted, update `frontend/src/environments/environment.prod.ts` or configure via Vercel env vars so the API points to the backend URL.
+> **Note:** Frontend production uses `apiUrl` pointing to the Render backend. Configure via `environment.prod.ts` or Vercel env vars if needed.
 
 ## Workflows
 
@@ -29,7 +29,7 @@ CI workflows for Task Manager. **Frontend** is deployed on Vercel. **Backend** i
 
 ## Reports
 
-- **Allure** (E2E): Artifact + deploy na GitHub Pages (branch `gh-pages`, path `allure/`). Uključi **GitHub Pages** u Settings → Pages → Source: gh-pages.
+- **Allure** (E2E): Artifact + deploy to GitHub Pages (branch `gh-pages`, path `allure/`). Enable **GitHub Pages** in Settings → Pages → Source: gh-pages.
 - **k6** (Performance): Generated in `tests/performance/k6-report/`
 
 ### E2E Production mode
